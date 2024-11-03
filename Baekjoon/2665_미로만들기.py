@@ -1,3 +1,5 @@
+# 다익스트라
+
 from heapq import heappush, heappop
 
 n = int(input())
