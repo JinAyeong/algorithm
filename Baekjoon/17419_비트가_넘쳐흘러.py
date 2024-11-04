@@ -9,3 +9,5 @@ while True:
         break
 
 print(result)
+
+# TODO 부분성공
