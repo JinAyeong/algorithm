@@ -1,3 +1,5 @@
+# 다익스트라
+
 from heapq import heappush, heappop
 
 board = [[0] * 501 for _ in range(501)]
