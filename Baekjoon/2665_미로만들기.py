@@ -13,6 +13,10 @@ while pq:
 
     cur_change, cur_r, cur_c = heappop(pq)
 
+    # 이미 더 적은 변경 횟수로 도달한 경우는 무시
+    if cur_change > changes[cur_r][cur_c]:
+        continue
+
     if (cur_r, cur_c) == (n-1, n-1):
         print(cur_change)
         exit(0)
