@@ -10,4 +10,4 @@ while True:
 
 print(result)
 
-# TODO 부분성공
+# TODO 다시풀기

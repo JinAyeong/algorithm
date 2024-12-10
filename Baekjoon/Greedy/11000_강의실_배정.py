@@ -9,7 +9,7 @@ heap = []  # 강의 끝나는 시간 (빠른순)
 
 for start, end in lectures:
 
-    # heap[0] <= 현재 강의 시작시간이라면
+    # heap[0] <= 현재 강의 시작시간 이라면
     if heap and heap[0] <= start:
         # 강의실 이어붙이기 (pop 하고 조건문 밖에서 새로 추가)
         heappop(heap)

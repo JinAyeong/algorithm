@@ -15,8 +15,6 @@ distance[X] = 0
 while Q:
     now_dist, now_city = Q.popleft()
 
-    # pq의 특성 때문에 더 긴거리가 미리 저장되어 있음
-    # now 가 이미 더 짧은 거리로 온 적이 있다면 pass
     for next_city in adjl[now_city]:
         new_dist = now_dist + 1
 
