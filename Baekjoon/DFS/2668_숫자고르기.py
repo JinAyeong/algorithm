@@ -24,8 +24,11 @@ for i in range(1, N+1):
     
     select(arr[i], [i], [arr[i]])
 
-result_arr = list(set(result_arr))
-result_arr.sort()
+# result_arr = list(set(result_arr))
+# result_arr.sort()
+result = sorted(set(result))  # 중복 제거 및 정렬
+
 print(len(result_arr))
-for result in result_arr:
-    print(result)
+# for result in result_arr:
+#     print(result)
+print("\n".join(map(str, result)))   # join 메서드 사용
