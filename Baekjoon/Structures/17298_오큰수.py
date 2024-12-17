@@ -1,22 +1,41 @@
 # NGE(i) = 오른쪽에 있으면서 Ai보다 큰 수중에 가장 왼쪽에 있는 수
 # 없을경우엔 NGE(i) = -1
 
-N = int(input())
-sequence = list(map(int, input().split()))
+# 풀이
+# 1. range(N-1, -1, -1) 순회하면서 가장 끝 값부터 검사
+# 2. stack = [numbers[-1]]로 시작
+# 3. 순회하면서 stack[-1]과 비교하여 오큰수인지 확인
+# 3-1. 오큰수가 맞다면 현재 값도 append하고 result[i]에 오큰수 저장
+# 3-2. 오큰수가 아니라면 stack.pop() (어차피 앞으로 순회할 값의 오큰수도 되지 못함, pop해서 제거)
+# 4. stack이 비어있으면 오큰수 찾지 못했을 경우이므로 result[i]에 -1 저장
 
-max_num = sequence[-1]
+N = int(input())
+numbers = list(map(int, input().split()))
+stack = [numbers[N-1]]
+
+result = [0] * N
 
 for i in range(N-1, -1, -1):
 
-    if i == len(sequence) - 1:
-        print(-1, end=" ")
+    if i == N-1:
+        result[i] = -1
 
     else:
-        if max_num > sequence[i]:
-            print(max_num, end=" ")
+        cur = numbers[i]
+        # print(f'cur {numbers[i]}')
 
-    # 숫자 갱신 우와!
-    if sequence[i] > sequence[i-1]:
-        max_num = sequence[i]
+        while stack:
+            if cur >= stack[-1]:
+                # print(f'cur {numbers[i]} stack[-1] {stack[-1]}')
+                stack.pop()
+            else:
+                result[i] = stack[-1]
+                stack.append(cur)
+                # print(f'cur {numbers[i]} stack[-1] {stack[-1]}')
+                break
 
-    print('a')
+        if not stack:
+            result[i] = -1
+            stack.append(cur)
+
+print(*result)
