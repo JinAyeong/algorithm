@@ -1,7 +1,6 @@
 # NGE(i) = 오른쪽에 있으면서 Ai보다 큰 수중에 가장 왼쪽에 있는 수
 # 없을경우엔 NGE(i) = -1
 
-# 풀이
 # 1. range(N-1, -1, -1) 순회하면서 가장 끝 값부터 검사
 # 2. stack = [numbers[-1]]로 시작
 # 3. 순회하면서 stack[-1]과 비교하여 오큰수인지 확인
@@ -11,31 +10,31 @@
 
 N = int(input())
 numbers = list(map(int, input().split()))
-stack = [numbers[N-1]]
+stack = []
 
 result = [0] * N
 
 for i in range(N-1, -1, -1):
 
-    if i == N-1:
+    cur = numbers[i]
+
+    # 오큰수가 될 수 없는 값들 제거
+    while stack:
+
+        # 현재 값의 오큰수가 아님 = 이후 순회할 숫자들의 오큰수도 될 수 없음 -> pop하여 제거
+        if cur >= stack[-1]:
+            stack.pop()
+        # 오큰수 찾음 -> break
+        else:
+            break
+
+    # 오큰수 결정
+    if stack:
+        result[i] = stack[-1]
+    else:
         result[i] = -1
 
-    else:
-        cur = numbers[i]
-        # print(f'cur {numbers[i]}')
-
-        while stack:
-            if cur >= stack[-1]:
-                # print(f'cur {numbers[i]} stack[-1] {stack[-1]}')
-                stack.pop()
-            else:
-                result[i] = stack[-1]
-                stack.append(cur)
-                # print(f'cur {numbers[i]} stack[-1] {stack[-1]}')
-                break
-
-        if not stack:
-            result[i] = -1
-            stack.append(cur)
+    # while문 끝나면 stack에 현재 값 무조건 추가
+    stack.append(cur)
 
 print(*result)
