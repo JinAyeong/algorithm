@@ -26,7 +26,7 @@ for i in range(1, N+1):
 
 # result_arr = list(set(result_arr))
 # result_arr.sort()
-result = sorted(set(result))  # 중복 제거 및 정렬
+result = sorted(set(result_arr))  # 중복 제거 및 정렬
 
 print(len(result_arr))
 # for result in result_arr:
