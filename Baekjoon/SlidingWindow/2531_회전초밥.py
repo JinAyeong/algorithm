@@ -34,7 +34,6 @@ for i in range(N):
 
 print(max_num)
 
-
 # --------------------------------------------
 # 윈도우 deque으로 관리
 # python 35316KB, 3496ms
