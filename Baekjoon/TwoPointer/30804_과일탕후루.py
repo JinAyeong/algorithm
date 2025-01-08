@@ -1,5 +1,3 @@
-from collections import deque
-
 N = int(input())
 fruits = list(map(int, input().split()))
 
