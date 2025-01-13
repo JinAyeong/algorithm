@@ -6,10 +6,10 @@ M = int(input())  # 가로등 개수
 spots = list(map(int, input().split()))  # 가로등 위치
 
 # 가로등의 최대 높이 : N, 최소 높이 : 1
-
 high = N + 1
 low = 1
 
+# 굴다리 검사
 def light(h):
 
     global spots, N, M
@@ -29,23 +29,19 @@ def light(h):
     else:
         return False
 
-result = None
+result = N
 
-while True:
+# 이분탐색
+while low <= high:
 
     cur = (low + high) // 2
 
-    cur_light = light(cur)
-    cur_light_low = light(cur-1)
-
-    if cur_light == True and cur_light_low == False:
+    # 조건에 맞았으면 일단 result 현재 값으로 저장하고 더 밑에 값 탐색
+    if light(cur):
         result = cur
-        break
-
-    if cur_light == True and cur_light_low == True:
-        high = cur
-
-    if cur_light == False and cur_light_low == False:
-        low = cur
+        high = cur - 1
+    # 조건에 안맞았으면 더 위에 값 탐색
+    else:
+        low = cur + 1
 
 print(result)
