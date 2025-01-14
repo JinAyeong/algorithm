@@ -1,47 +1,33 @@
-# 가로등의 높이만큼 주위를 비출 수 있음
-# 최소 예산으로 굴다리의 모든 길을 밝힐 수 있는 높이 구하기
+for tc in range(int(input())):
 
-N = int(input())  # 굴다리 길이
-M = int(input())  # 가로등 개수
-spots = list(map(int, input().split()))  # 가로등 위치
+    N, M = map(int, input().split())  # A수, B수
+    A = sorted(map(int, input().split()))
+    B = sorted(map(int, input().split()))
 
-# 가로등의 최대 높이 : N, 최소 높이 : 1
-high = N + 1
-low = 1
+    result = 0
+    last_result = M-1
 
-# 굴다리 검사
-def light(h):
+    # 거꾸로 탐색하면서 숫자 지날 때마다 이분탐색 범위 조정
+    for a in range(N-1, -1, -1):
 
-    global spots, N, M
+        low, high = 0, last_result
+        cur_a = A[a]
+        cur_result = 0
 
-    cur_end = 0
+        while low <= high:
 
-    for spot in spots:
-        start, end = spot - h, spot + h
+            mid = (low + high) // 2
+            cur_b = B[mid]
 
-        if start > cur_end:
-            return False
-        else:
-            cur_end = end
+            # 현재 먹이 먹을 수 있으면 결과 갱신하고 더 높은 값 탐색
+            if cur_a > cur_b:
+                low = mid + 1
+                cur_result = mid + 1
+            # 현재 먹이 먹을 수 없으면 더 낮은 값 탐색
+            else:
+                high = mid - 1
 
-    if cur_end >= N:
-        return True
-    else:
-        return False
+        result += cur_result
+        last_result = cur_result - 1
 
-result = N
-
-# 이분탐색
-while low <= high:
-
-    cur = (low + high) // 2
-
-    # 조건에 맞았으면 일단 result 현재 값으로 저장하고 더 밑에 값 탐색
-    if light(cur):
-        result = cur
-        high = cur - 1
-    # 조건에 안맞았으면 더 위에 값 탐색
-    else:
-        low = cur + 1
-
-print(result)
+    print(result)
