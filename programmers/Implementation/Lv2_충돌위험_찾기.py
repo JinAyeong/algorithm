@@ -2,7 +2,6 @@
 # 충돌 횟수 return
 # points[i] = i + 1 번 포인트의 (r, c)
 # routes[i] = i + 1 번 로봇의 운송 경로, (routes[i]의 길이는 모두 같음)
-# 로봇 현재 위치 :
 
 def solution(points, routes):  # 포인트들, 로봇 이동 경로
 
