@@ -5,8 +5,8 @@ def dig(i, j, n, m, land):
 
     q = deque([(i, j)])
 
-    visited_column = {j}
-    cur_oil = 1
+    visited_column = {j}  # 이 구역을 bfs하면서 방문한 열 집합
+    cur_oil = 1  # 이 구역의 석유량
 
     while q:
         r, c = q.popleft()
@@ -15,11 +15,12 @@ def dig(i, j, n, m, land):
             nr, nc = r + di, c + dj
 
             if 0 <= nr < n and 0 <= nc < m and not visited[nr][nc] and land[nr][nc]:
-                visited_column.add(nc)
+                visited_column.add(nc)  # 방문한 열 추가
                 q.append((nr, nc))
                 visited[nr][nc] = True
                 cur_oil += 1
 
+    # 방문한 열 순회하면서 oil (각 열을 뚫으면 발견할 수 있는 석유량) 추가해줌
     for v in list(visited_column):
         oil[v] += cur_oil
 
@@ -34,6 +35,7 @@ def solution(land):
 
     visited = [[False] * m for _ in range(n)]
 
+    # 모든 땅 한번씨만 방문해서 석유 체크 bfs
     for i in range(n):
         for j in range(m):
 
