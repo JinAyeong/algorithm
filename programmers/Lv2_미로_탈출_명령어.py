@@ -49,3 +49,33 @@ def solution(n, m, x, y, r, c, k):
     move(n, m, x - 1, y - 1, r - 1, c - 1, k, '')
 
     return answer
+
+
+from collections import deque
+
+
+def solution(n, m, x, y, r, c, k):
+    # 사전순
+    direction = {0: (1, 0), 1: (0, -1), 2: (0, 1), 3: (-1, 0)}
+    d = ['d', 'l', 'r', 'u']
+
+    # k거리로 도달하지 못하는 경우 impossible !!
+    if abs(x - r) + abs(m - c) > k or (k - (abs(x - r) + abs(m - c))) % 2 == 1:
+        return 'impossible'
+
+    q = deque([(x - 1, y - 1, '')])
+
+    while q:
+
+        cr, cy, cw = q.popleft()
+
+        if len(cw) == k and (cr, cy) == (r - 1, c - 1):
+            return cw
+
+        for i in range(4):
+            nr, nc = cr + direction[i][0], cy + direction[i][1]
+
+            if 1 <= nr < n and 1 <= nc < m and len(cw) + 1 <= k:
+                q.append((nr, nc, cw + d[i]))
+
+    return 'impossible'
