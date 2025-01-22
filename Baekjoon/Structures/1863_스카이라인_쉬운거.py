@@ -7,7 +7,7 @@ for _ in range(N):
 
     i, h = map(int, input().split())
 
-    # 입력의 첫번째 높이가 0일 때 고려 (질문게시판 보고 해결..)
+    # 입력의 첫번째 높이가 0일 때 고려
     if not stack and h != 0:
         stack.append(h)
 
