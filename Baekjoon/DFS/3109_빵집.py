@@ -17,6 +17,9 @@ def pipe(i, j):
             visited[ni][nj] = True
             if pipe(ni, nj): # 끝에 도달했으면 1 return
                 return 1
+            # else:
+            #     visited[ni][nj] = False
+            # -> 이 과정이 필요하지 않을까 생각했는데 어차피 지금 행에서 실패하면 다음 행에서도 실패하는 길이라 소용 없었다. 괜히 중복방문만 일으켰다.
 
     return 0 # 도달하지 못하고 끝나면 0 return
 
