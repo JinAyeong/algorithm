@@ -95,7 +95,6 @@ print(result)
 # 5. 다 센 후 덩어리 return
 # 6. 덩어리 2개 이상 나올때, 아니면 다 녹았을 때 (0개) 일 때 결과 갱신하고 break
 
-from collections import deque
 
 N, M = map(int, input().split())
 ice = [list(map(int, input().split())) for _ in range(N)]
