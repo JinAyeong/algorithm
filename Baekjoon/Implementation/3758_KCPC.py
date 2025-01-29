@@ -30,6 +30,7 @@ for _ in range(int(input())):
     # 정렬
     logs.sort(key=lambda x:(-x[0], x[1], x[2]))
 
+    # 내 등수 찾기
     for idx, log in enumerate(logs):
         if log[3] == t:
             print(idx + 1)
