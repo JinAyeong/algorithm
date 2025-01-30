@@ -1,3 +1,6 @@
+#------------------------------------------
+# 슬라이딩 윈도우
+
 N, X = map(int, input().split())
 visit = list(map(int, input().split()))
 
