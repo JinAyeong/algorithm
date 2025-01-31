@@ -24,13 +24,10 @@ for i in range(len(string)):
             break
 
         elif stack[-1] in open and string[i-1] == stack[-1]:
-            stack.pop()
             total += temp
-            temp //= close[cur]
 
-        else:
-            stack.pop()
-            temp //= close[cur]
+        stack.pop()
+        temp //= close[cur]
 
 if stack:
     total = 0
