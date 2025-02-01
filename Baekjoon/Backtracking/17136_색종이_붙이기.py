@@ -46,7 +46,7 @@ dfs(0, 0)
 print(result if result != float('inf') else -1)
 
 #---------------------------------------------------------
-# python 4432 ms, 32424 KB
+# python 2628 ms, 32544 KB
 
 paper = [list(map(int, input().split())) for _ in range(10)]
 
@@ -72,6 +72,9 @@ def dfs(m, n):
     if m == cnt:
         result = min(result, n)
         return n
+
+    if n >= result:
+        return
 
     i, j = paper_1[m]
 
