@@ -2,7 +2,7 @@ N = int(input())
 
 dp = [[0] * 10 for _ in range(N+1)] # dp[i][j] : i자리수에서 첫 숫자가 j인 오르막 개수
 
-dp[1] = [1] * 10
+dp[1] = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 for i in range(2, N+1):
     # for j in range(10):
@@ -13,4 +13,4 @@ for i in range(2, N+1):
     for j in range(8, -1, -1):
         dp[i][j] = (dp[i-1][j] + dp[i][j+1]) % 10007
 
-print(sum(dp[N]) % 10007)
+print((sum(dp[N]) + 1) % 10007)
