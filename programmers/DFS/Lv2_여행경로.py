@@ -26,7 +26,6 @@ def solution(tickets):
     for i, t in enumerate(tickets):
 
         used[i] = True
-
         if travel(t):
             return answer
         used[i] = False
