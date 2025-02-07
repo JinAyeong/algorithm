@@ -9,6 +9,17 @@ result = 0
 storage = [list(map(int, input().split())) for _ in range(N)]
 storage.sort()
 
+for L, H in storage:
 
+    if not stack:
+        stack.append((L, H))
+
+    else:
+        if stack[-1] < H:
+            while True:
+
+
+        else:
+            stack.append((L, H))
 
 print(result)
