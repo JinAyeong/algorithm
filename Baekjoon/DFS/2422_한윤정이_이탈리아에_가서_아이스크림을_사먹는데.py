@@ -21,6 +21,5 @@ def dfs(i, start, select):
         if j not in select:
             dfs(i + 1, j + 1, select + [j])
 
-
 dfs(0, 1, [])
 print(result)
