@@ -1,5 +1,5 @@
-# import sys
-# input = sys.stdin.readline
+import sys
+input = sys.stdin.readline
 
 n, m = map(int, input().split())
 parent = [i for i in range(n)]
@@ -29,6 +29,7 @@ found = False
 for c in range(1, 1+m):
     a, b = map(int, input().split())
 
+    # 같은 루트를 가지고 있을때, 그 둘을 연결하면 마침내 사이클 완성!
     if find(a) == find(b):
         print(c)
         found = True
