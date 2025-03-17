@@ -33,7 +33,6 @@ def check(i, j):
 
     if mp[i][j] and mp[i+1][j] and mp[i][j+1] and mp[i+1][j+1]:
         return 1
-
     return 0
 
 for _ in range(N):
