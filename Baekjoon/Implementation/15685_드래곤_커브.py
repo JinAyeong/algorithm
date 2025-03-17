@@ -6,9 +6,7 @@
 '''
 
 N = int(input())
-
 direction = [(1, 0), (0, -1), (-1, 0), (0, 1)] # 오른쪽, 위쪽, 왼쪽, 아래쪽
-
 mp = [[False] * 101 for _ in range(101)]
 result = 0
 
