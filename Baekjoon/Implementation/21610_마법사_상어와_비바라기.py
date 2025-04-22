@@ -13,7 +13,6 @@ def move(d, s):
     # 구름 이동
     while clouds:
         ci, cj = clouds.popleft()
-
         ni, nj = (ci + directions[d][0] * s) % N, (cj + directions[d][1] * s) % N
         mp[ni][nj] += 1
         watered.add((ni, nj))
@@ -25,7 +24,7 @@ def move(d, s):
             if 0 <= ni < N and 0 <= nj < N and mp[ni][nj] > 0:
                 mp[wi][wj] += 1
 
-    #
+    # 새로운 구름 생성 (2 이상이면서 방금 물 내린 곳 제외)
     for i in range(N):
         for j in range(N):
             if mp[i][j] >= 2 and (i, j) not in watered:
