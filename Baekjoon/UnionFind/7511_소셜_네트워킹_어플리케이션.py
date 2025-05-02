@@ -23,7 +23,7 @@ class SNA:
                 self.rank[rootX] += self.rank[rootY]
                 self.parent[rootY] = rootX
 
-def process_scenario():
+def solve():
     n = int(input())
     k = int(input())
     dsu = SNA(n)
@@ -41,7 +41,7 @@ def main():
     T = int(input())
     for t in range(T):
         print(f'Scenario {t+1}:')
-        process_scenario()
+        solve()
         if t != T - 1:
             print()
 
