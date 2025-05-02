@@ -1,46 +1,48 @@
 import sys
 input = sys.stdin.readline
 
-T = int(input())
+class SNA:
+    def __init__(self, size):
+        self.parent = list(range(size))
+        self.rank = [1] * size
 
-for t in range(T):
-    print(f'Scenario {t+1}:')
-    n = int(input()) # 유저의 수
-    k = int(input()) # 친구 관계 수
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
 
-    parent = [i for i in range(n)]
-    rank = [1] * n
-
-    def find(x):
-        if parent[x] != x:
-            parent[x] = find(parent[x])
-        return parent[x]
-
-    def union(x, y):
-        rootX = find(x)
-        rootY = find(y)
+    def union(self, x, y):
+        rootX = self.find(x)
+        rootY = self.find(y)
 
         if rootX != rootY:
-            if rank[rootX] < rank[rootY]:
-                rank[rootY] += rank[rootX]
-                parent[rootX] = rootY
+            if self.rank[rootX] < self.rank[rootY]:
+                self.rank[rootY] += self.rank[rootX]
+                self.parent[rootX] = rootY
             else:
-                rank[rootX] += rank[rootY]
-                parent[rootY] = rootX
+                self.rank[rootX] += self.rank[rootY]
+                self.parent[rootY] = rootX
 
+def process_scenario():
+    n = int(input())
+    k = int(input())
+    dsu = SNA(n)
 
-    # 친구 관계 (a, b는 친구)
     for _ in range(k):
         a, b = map(int, input().split())
-        union(a, b)
+        dsu.union(a, b)
 
-    m = int(input()) # 미리 구할 쌍의 수
-
-    # 구해야 하는 쌍의 수
+    m = int(input())
     for _ in range(m):
         u, v = map(int, input().split())
-        result = find(u) == find(v)
-        print(1 if result else 0)
+        print(1 if dsu.find(u) == dsu.find(v) else 0)
 
-    if t != T-1:
-        print()
+def main():
+    T = int(input())
+    for t in range(T):
+        print(f'Scenario {t+1}:')
+        process_scenario()
+        if t != T - 1:
+            print()
+
+main()
