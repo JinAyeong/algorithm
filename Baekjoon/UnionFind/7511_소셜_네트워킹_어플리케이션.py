@@ -26,16 +26,16 @@ class SNA:
 def solve():
     n = int(input())
     k = int(input())
-    dsu = SNA(n)
+    sna = SNA(n)
 
     for _ in range(k):
         a, b = map(int, input().split())
-        dsu.union(a, b)
+        sna.union(a, b)
 
     m = int(input())
     for _ in range(m):
         u, v = map(int, input().split())
-        print(1 if dsu.find(u) == dsu.find(v) else 0)
+        print(1 if sna.find(u) == sna.find(v) else 0)
 
 def main():
     T = int(input())

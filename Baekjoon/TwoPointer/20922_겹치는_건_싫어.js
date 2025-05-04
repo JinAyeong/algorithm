@@ -6,35 +6,24 @@ const input = require("fs")
 
 const [N, M] = input[0].split(" ").map(Number);
 const sequence = input[1].split(" ").map(Number);
-const numberCount = {};
+const numberCount = new Map();
 
-let left = 0,
-  right = 1;
+let left = 0;
 
-numberCount[sequence[left]] = 1;
+numberCount.set(sequence[left], 1);
 
 let result = 1;
 
-while (left < N && right < N) {
-  rightNum = sequence[right];
+for (let right = 1; right < N; right++) {
+  const rightNum = sequence[right];
+  numberCount.set(rightNum, (numberCount.get(rightNum) || 0) + 1);
 
-  if (numberCount[rightNum]) {
-    numberCount[rightNum] += 1;
-  } else {
-    numberCount[rightNum] = 1;
+  while (numberCount.get(rightNum) > M) {
+    const leftNum = sequence[left++];
+    numberCount.set(leftNum, numberCount.get(leftNum) - 1);
   }
 
-  while (numberCount[rightNum] > M) {
-    leftNum = sequence[left++];
-
-    numberCount[leftNum] -= 1;
-  }
-
-  const curLength = right - left + 1;
-
-  result = Math.max(curLength, result);
-
-  right += 1;
+  result = Math.max(result, right - left + 1);
 }
 
 console.log(result);
