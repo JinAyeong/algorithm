@@ -32,10 +32,10 @@ def dfs(arr, idx, cnt):
     r, c = arr[idx]
     max_cnt = dfs(arr, idx + 1, cnt)
 
-    if not visited_l[r - c] and not visited_r[r + c]:
-        visited_l[r - c] = visited_r[r + c] = True
+    if not visited_l[r + c] and not visited_r[r - c]:
+        visited_l[r + c] = visited_r[r - c] = True
         max_cnt = max(max_cnt, dfs(arr, idx + 1, cnt + 1))
-        visited_l[r - c] = visited_r[r + c] = False
+        visited_l[r + c] = visited_r[r - c] = False
 
     return max_cnt
 
@@ -73,10 +73,10 @@ def dfs(idx, cnt):
     r, c = blank[idx]
     max_cnt = dfs(idx+1, cnt)
 
-    if not visited_r[r+c] and not visited_l[r-c]:
-        visited_r[r + c] = visited_l[r - c] = True
+    if not visited_r[r - c] and not visited_l[r + c]:
+        visited_r[r - c] = visited_l[r + c] = True
         max_cnt = max(max_cnt, dfs(idx+1, cnt+1))
-        visited_r[r + c] = visited_l[r - c] = False
+        visited_r[r - c] = visited_l[r + c] = False
 
     return max_cnt
 
