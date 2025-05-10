@@ -2,41 +2,45 @@ import sys
 input = sys.stdin.readline
 
 N, M = map(int, input().split())
-mp = [list(input()) for _ in range(N)]
+grid = [list(input().strip()) for _ in range(N)]
 
 parent = [[(i, j) for j in range(M)] for i in range(N)]
-rank = [[1 for j in range(M)] for i in range(N)]
-direction = {'U': (-1, 0), 'D': (1, 0), 'R': (0, 1), 'L': (0, -1)}
+size = [[1 for _ in range(M)] for _ in range(N)]
+direction = {'U': (-1, 0), 'D': (1, 0), 'L': (0, -1), 'R': (0, 1)}
 
-def find(tup):
+# find 함수 (경로 압축)
+def find(pos):
+    x, y = pos
+    if parent[x][y] != (x, y):
+        parent[x][y] = find(parent[x][y])
+    return parent[x][y]
 
-    if parent[tup[0]][tup[1]] != tup:
-        parent[tup[0]][tup[1]] = find(parent[tup[0]][tup[1]])
-    return parent[tup[0]][tup[1]]
+# union 함수 (크기 기준 union)
+def union(a, b):
+    root_a = find(a)
+    root_b = find(b)
 
-def union(tup1, tup2):
-
-    root1 = find(tup1)
-    root2 = find(tup2)
-
-    if root1 != root2:
-        if rank[root1[0]][root1[1]] < rank[root2[0]][root2[1]]:
-            parent[root1[0]][root1[1]] = root2
-            rank[root2[0]][root2[1]] += rank[root1[0]][root1[1]]
+    if root_a != root_b:
+        ax, ay = root_a
+        bx, by = root_b
+        if size[ax][ay] < size[bx][by]:
+            parent[ax][ay] = root_b
+            size[bx][by] += size[ax][ay]
         else:
-            parent[root2[0]][root2[1]] = root1
-            rank[root1[0]][root1[1]] += rank[root2[0]][root2[1]]
+            parent[bx][by] = root_a
+            size[ax][ay] += size[bx][by]
 
+# 방향대로 union 수행
 for i in range(N):
     for j in range(M):
-        dir = direction[mp[i][j]]
-        next = (i+dir[0], j+dir[1])
-        union((i, j), next)
+        dx, dy = direction[grid[i][j]]
+        ni, nj = i + dx, j + dy
+        union((i, j), (ni, nj))
 
-total_parent = set()
-
+# 유일한 루트의 개수 세기
+unique_roots = set()
 for i in range(N):
     for j in range(M):
-        total_parent.add(find((i, j)))
+        unique_roots.add(find((i, j)))
 
-print(len(total_parent))
+print(len(unique_roots))
