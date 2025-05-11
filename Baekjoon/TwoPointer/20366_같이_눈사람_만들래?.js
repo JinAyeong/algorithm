@@ -7,7 +7,7 @@ const input = require("fs")
 const N = Number(input[0]);
 const arr = input[1].split(" ").map(Number);
 arr.sort((a, b) => a - b);
-let result = Number(Infinity);
+let result = Infinity;
 
 for (let i = 0; i < N; i++) {
   for (let j = i + 1; j < N; j++) {
