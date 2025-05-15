@@ -36,6 +36,7 @@ def bfs(i, j, id):
 
     return size
 
+
 # 벽 주변 방의 크기 구하는 함수
 def break_wall(i, j):
     cur_size = 1
@@ -60,6 +61,7 @@ for i in range(N):
         if mp[i][j] == '0' and group_mp[i][j] == -1:
             group_size.append(bfs(i, j, group_id))
             group_id += 1
+
 
 # 2. 각각의 벽 뚫었을때 상하좌루 그룹 탐색 후 크기 합치기
 result = [['0'] * M for _ in range(N)]
