@@ -18,4 +18,5 @@ def solve(N, meals):
 for _ in range(T):
     N = int(input())
     meals = list(map(int, input().split()))
+
     print(solve(N, meals))
