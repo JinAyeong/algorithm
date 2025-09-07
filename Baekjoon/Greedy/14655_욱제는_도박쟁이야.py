@@ -9,11 +9,8 @@
 '''
 
 N = int(input())
-first = list(map(int, input().split()))
-second = list(map(int, input().split()))
-
-first = list(map(lambda x: abs(x), first))
-second = list(map(lambda x: abs(x), second))
+first = list(map(lambda x: abs(int(x)), input().split()))
+second = list(map(lambda x: abs(int(x)), input().split()))
 
 answer = sum(first) + sum(second)
 print(answer)
