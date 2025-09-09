@@ -8,24 +8,21 @@ N, K = map(int, input().split())
 mp = [0] * 1000001
 
 for _ in range(N):
-    x, g = map(int, input().split())
+    g, x = map(int, input().split())
     mp[x] = g
 
-cur_sum = sum(mp[:min(2 * K + 1, 1000001)])
+window_size = 2 * K + 1
+cur_sum = sum(mp[:window_size])
 answer = cur_sum
 
-left, right = 0, 2 * K
+left, right = 0, window_size - 1
 
-while right <= 20:
-
-    print(left, right, cur_sum)
-
+while right + 1 < len(mp):
     cur_sum -= mp[left]
-    cur_sum += mp[right]
-    
     left += 1
     right += 1
-
-    answer = max(cur_sum, answer)
+    cur_sum += mp[right]
+    answer = max(answer, cur_sum)
 
 print(answer)
+
