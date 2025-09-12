@@ -3,8 +3,8 @@ N, M, K = map(int, input().split())
 dp = [[0] * (M + 1) for _ in range(N + 1)]
 dp[1][1] = 1
 
-a = (K // M + 1 if K else N)
-b = (K % M if K else M)
+a = ((K - 1) // M + 1 if K else N)
+b = ((K - 1) % M + 1 if K else M)
 
 for i in range(1, a+1):
     for j in range(1, b+1):
