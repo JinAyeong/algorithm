@@ -1,3 +1,26 @@
+# 다익스트라
+from heapq import heappop, heappush
+
+
+def dijkstra(s, n, adjl):
+    dist = [float('inf')] * (n + 1)
+    dist[s] = 0
+    heap = [(0, s)]
+
+    while heap:
+        d, cur = heappop(heap)
+
+        if d > dist[cur]:
+            continue
+
+        for nd, next in adjl[cur]:
+            if dist[next] > nd + d:
+                dist[next] = nd + d
+                heappush(heap, (nd + d, next))
+
+    return dist
+
+# 플로이드 워셜
 def solution(n, s, a, b, fares):
     dist = [[float('inf')] * (n + 1) for _ in range(n + 1)]
 
