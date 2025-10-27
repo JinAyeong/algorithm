@@ -1,50 +1,28 @@
-import sys
-input = sys.stdin.readline
-
 N, M = map(int, input().split())
 
-mp = [[0] * N for _ in range(N)]
+mp = [[0] * (N+1) for _ in range(N+1)]
 
 for _ in range(M):
-    X, Y, L, F = map(int, input().split())
+    x, y, l, f = map(int, input().split())
+    
+    for i in range(x+1, x+l+1):
+        for j in range(y+1, y+l+1):
+            mp[i][j] = f
 
-    for x in range(X, X + L):
-        for y in range(Y, Y + L):
-            mp[x][y] = F
+for lin in mp:
+    print(*lin)
 
-low = 0
-high = N
+prefix = [[0] * (N+1) for _ in range(N+1)]
+prefix[1][1] = 1
 
-def check(i, j, length):
+for i in range(1, N+1):
+    for j in range(1, N+1):
+        if (i, j) == (1, 1):
+            continue
+        
+        is_new = 1 if (mp[i][j] != mp[i-1][j] and mp[i][j] != mp[i][j-1] and mp[i][j] != 0) else 0
 
-    cur_fruit = set()
-    for k in range(length):
-        for l in range(length):
-            cur_fruit.add(mp[i + k][j + l])
-            if len(cur_fruit) > 2 or mp[i + k][j + l] == 0:
-                return False
+        prefix[i][j] = is_new + prefix[i-1][j] + prefix[i][j-1] - prefix[i-1][j-1]
 
-    return True
-
-result = 0
-
-while low <= high:
-
-    mid = (low + high) // 2
-    cur_result = False
-
-    for i in range(0, N-mid+1):
-        if cur_result:
-            break
-        for j in range(0, N-mid+1):
-            if check(i, j, mid):
-                cur_result = True
-
-    if cur_result:
-        result = mid
-        low = mid + 1
-
-    else:
-        high = mid - 1
-
-print(result ** 2)
+for lin in prefix:
+    print(*lin)
