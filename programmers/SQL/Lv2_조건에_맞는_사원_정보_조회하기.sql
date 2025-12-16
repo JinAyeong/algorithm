@@ -31,5 +31,5 @@ JOIN (
     GROUP BY EMP_NO          -- 사원번호로 묶어 점수 합산
 ) AS M
 ON E.EMP_NO = M.EMP_NO       -- 합산된 점수를 가진 M과 다시 사원 정보 조인
-ORDER BY M.SCORE DESC         -- 가장 높은 점수 순 정렬
-LIMIT 1;                      -- 가장 높은 사람 1명만 출력
+ORDER BY M.SCORE DESC        -- 가장 높은 점수 순 정렬
+LIMIT 1;                     -- 가장 높은 사람 1명만 출력
