@@ -4,6 +4,9 @@ N개의 집, M개의 길
 각 분리된 마을의 집을 연결하는 길은 최소로 유지
 '''
 
+import sys
+input = sys.stdin.readline
+
 N, M = map(int, input().split())
 edges = []
 
