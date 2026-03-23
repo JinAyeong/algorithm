@@ -1,7 +1,6 @@
 N, M = map(int, input().split())
 mp = [input() for _ in range(N)]
 
-
 def solve(i, j):
 
     white = black = 0
