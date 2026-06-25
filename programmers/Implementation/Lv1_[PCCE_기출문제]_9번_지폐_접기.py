@@ -9,3 +9,4 @@ def solution(wallet, bill):
         answer += 1
     
     return answer
+    
