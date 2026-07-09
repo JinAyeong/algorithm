@@ -1,9 +1,11 @@
 SELECT CAR_TYPE, COUNT(*) AS CARS
 FROM CAR_RENTAL_COMPANY_CAR
 -- where 절에서는 = 연사자 사용 불가능
-WHERE OPTIONS LIKE '%가죽시트%'
-   OR OPTIONS LIKE '%열선시트%'
-   OR OPTIONS LIKE '%통풍시트%'
+WHERE (
+    OPTIONS LIKE '%통풍시트%'
+    OR OPTIONS LIKE '%열선시트%'
+    OR OPTIONS LIKE '%가죽시트%'
+)
 -- GROUP BY : 차 종류별로 묶기
 GROUP BY CAR_TYPE 
 ORDER BY CAR_TYPE;
