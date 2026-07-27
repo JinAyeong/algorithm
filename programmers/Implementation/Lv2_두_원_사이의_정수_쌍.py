@@ -14,4 +14,4 @@ def solution(r1, r2):
 
         answer += (floor(high) - ceil(low) + 1)
 
-    return answer * 4s
+    return answer * 4
