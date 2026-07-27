@@ -16,6 +16,11 @@
 """
 import os, re, sys, subprocess, shutil, collections
 
+# Windows 콘솔 기본 코드페이지(cp949)에서 한글 출력이 깨지는 것 방지
+if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+
 # ── 설정값 ─────────────────────────────────────────────
 # 스크립트 위치 디렉터리를 algorithm 레포로 간주, 인접 AlgoStudy 레포 존재 전제
 ALGO = os.path.dirname(os.path.abspath(__file__))
@@ -36,8 +41,10 @@ DRY = "--dry-run" in sys.argv
 
 def git(args, cwd, **kw):
     # 한글 경로 이스케이프 방지 위한 quotepath 비활성화 실행
+    # encoding 미지정 시 Windows 로케일(cp949)로 디코딩을 시도해 UTF-8 커밋 메시지에서 깨짐 발생
     return subprocess.run(["git", "-c", "core.quotepath=false", *args],
-                          cwd=cwd, capture_output=True, text=True, **kw)
+                          cwd=cwd, capture_output=True, text=True,
+                          encoding="utf-8", **kw)
 
 
 def normalize(stem):
@@ -202,7 +209,8 @@ def main():
         env = dict(os.environ)
         env["GIT_AUTHOR_DATE"] = env["GIT_COMMITTER_DATE"] = date + "T12:00:00"
         r = subprocess.run(["git", "commit", "-m", msg, "--", rel],
-                           cwd=STUDY, env=env, capture_output=True, text=True)
+                           cwd=STUDY, env=env, capture_output=True, text=True,
+                           encoding="utf-8")
         if r.returncode == 0:
             made += 1
             print(f"반영: {rel}  ->  {msg}{warn}")
