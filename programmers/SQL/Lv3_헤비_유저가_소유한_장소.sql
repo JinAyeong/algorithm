@@ -1,0 +1,14 @@
+SELECT
+    ID,
+    NAME,
+    HOST_ID
+FROM (
+    SELECT
+        ID,
+        NAME,
+        HOST_ID,
+        COUNT(*) OVER (PARTITION BY HOST_ID) AS CNT
+    FROM PLACES
+) T
+WHERE CNT >= 2
+ORDER BY ID;
