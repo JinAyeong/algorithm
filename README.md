@@ -26,9 +26,12 @@ algorithm/
 │  ├─ DFS/
 │  ├─ SQL/
 │  └─ ...
-└─ NeetCode/      NeetCode 풀이
-   ├─ BFS/
-   └─ ...
+├─ NeetCode/      NeetCode 풀이
+│  ├─ BFS/
+│  └─ ...
+└─ theory/        이론 정리
+   ├─ data-structures/
+   └─ algorithms/
 ```
 
 ## 커밋 컨벤션
