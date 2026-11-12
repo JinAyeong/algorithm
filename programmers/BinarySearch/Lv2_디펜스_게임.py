@@ -1,6 +1,32 @@
+# 이분탐색
+def solution(n, k, enemy):
+    answer = 0
+    
+    def check(num):
+        
+        lst = enemy[:num]
+        lst.sort()
+        
+        if sum(lst[:max(num-k, 0)]) <= n:
+            return True
+        return False
+    
+    low = 0
+    high = len(enemy)
+    
+    while low <= high:
+        
+        mid = (low + high) // 2
+        
+        if check(mid):
+            answer = mid
+            low = mid + 1
+            
+        elif not check(mid):
+            high = mid - 1
+            
+    return answer
 
-
-#----------------------------------
 # backtracking 시간초과
 
 import sys
