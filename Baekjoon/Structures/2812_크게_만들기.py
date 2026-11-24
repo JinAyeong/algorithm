@@ -20,8 +20,8 @@ if deleted < K:
     for _ in range(K-deleted):
         stack.pop()
 
-for s in stack:
-    print(s, end="")
-    
-# stack = list(map(str, stack))
-# print("".join(stack))
+# for s in stack:
+#     print(s, end="")
+
+stack = list(map(str, stack))
+print("".join(stack))
